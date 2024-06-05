@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class CikarmaSayfasi extends AppCompatActivity {
     TextView skorTextView;
     TextView soruTextView;
     EditText cevapEditText;
+    ImageView wrongImg;
 
     int sayi1;
     int sayi2;
@@ -32,6 +35,7 @@ public class CikarmaSayfasi extends AppCompatActivity {
         skorTextView = findViewById(R.id.textView);
         soruTextView = findViewById(R.id.textView2);
         cevapEditText = findViewById(R.id.editTextNumber);
+        wrongImg = findViewById(R.id.wrongImg);
 
         skorTextView.setText("Skor : " + skor);
 
@@ -60,7 +64,7 @@ public class CikarmaSayfasi extends AppCompatActivity {
                 soruTextView.setText(sayi1 + " - "+sayi2+ " = ? ");
                 cevapEditText.setText("");
             }else{
-                Toast.makeText(getApplicationContext(),"Yanlış Cevap Girdiniz", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(),"Yanlış Cevap Girdiniz", Toast.LENGTH_LONG).show();
                 skor--;
                 skorTextView.setText("Skor : " + skor);
                 sayi1 = myRandom.nextInt(10);
@@ -68,6 +72,33 @@ public class CikarmaSayfasi extends AppCompatActivity {
                 cevap = sayi1 - sayi2;
                 soruTextView.setText(sayi1 + " - "+sayi2+ " = ? ");
                 cevapEditText.setText("");
+
+
+
+
+                new CountDownTimer(1500,65100){
+
+                    boolean toogle = false;
+                    @Override
+                    public void onTick(long milisUntilFinshed){
+
+                        if(toogle){
+                            wrongImg.setVisibility(View.VISIBLE);
+                            toogle = false;
+                        }else{
+                            wrongImg.setVisibility(View.INVISIBLE);
+                            toogle = true;
+                        }
+
+                    }
+                    @Override
+                    public void onFinish(){
+                        wrongImg.setVisibility(View.INVISIBLE);
+                    }
+                }.start();
+
+
+
             }
 
 
