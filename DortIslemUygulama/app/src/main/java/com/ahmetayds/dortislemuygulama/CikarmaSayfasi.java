@@ -24,6 +24,8 @@ public class CikarmaSayfasi extends AppCompatActivity {
     ImageView wrongImg;
     ImageView correctImg;
 
+
+
     int sayi1;
     int sayi2;
     int cevap;
@@ -86,6 +88,8 @@ public class CikarmaSayfasi extends AppCompatActivity {
                     @Override
                     public void onFinish(){
                         correctImg.setVisibility(View.INVISIBLE);
+                        skorTextView.setVisibility(View.VISIBLE);
+
                     }
                 }.start();
 
