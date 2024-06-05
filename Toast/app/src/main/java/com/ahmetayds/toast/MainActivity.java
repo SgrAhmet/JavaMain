@@ -58,6 +58,7 @@ public void sonucIslem(View view){
              }else{
                 String message = "Notunuz : " + myEditText.getText().toString();
                 Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+                System.out.println("deneme değişikliği");
             }
 
     }
