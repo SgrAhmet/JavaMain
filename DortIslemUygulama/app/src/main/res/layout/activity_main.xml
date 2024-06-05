@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="356dp"
+        android:layout_height="201dp"
+        android:layout_marginBottom="150dp"
+        android:onClick="deneme"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#7DF99F"
+            android:fontFamily="sans-serif-black"
+            android:onClick="ToplamaGecis"
+            android:text="Toplama"
+            android:textColor="#000000"
+            app:strokeColor="#F2101010"
+            app:strokeWidth="3dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FE4B4B"
+            android:fontFamily="sans-serif-black"
+            android:onClick="CikarmaGecis"
+            android:text="Çıkarma"
+            android:textColor="#000000"
+            app:strokeColor="#000000"
+            app:strokeWidth="3dp" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FEDB64"
+            android:fontFamily="sans-serif-black"
+            android:onClick="CarpmaGecis"
+            android:text="Çarpma"
+            android:textColor="#000000"
+            app:strokeWidth="3dp" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00C2FE"
+            android:fontFamily="sans-serif-black"
+            android:onClick="BolmeGecis"
+            android:text="Bölme"
+            android:textColor="#000000"
+            app:strokeWidth="3dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="237dp"
+        android:layout_height="325dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#00C2FE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dort_islem" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
