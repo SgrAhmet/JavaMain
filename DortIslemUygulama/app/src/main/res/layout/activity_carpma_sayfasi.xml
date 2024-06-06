@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".CarpmaSayfasi">
 
+    <View
+        android:id="@+id/view5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#8BC34A"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -40,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/cevaplaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -63,16 +72,17 @@
         android:text="Ana Sayfaya Dön"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
+        app:layout_constraintTop_toBottomOf="@+id/cevaplaButton"
         app:strokeWidth="3dp"
         android:textColor="#000000"
         android:fontFamily="sans-serif-black"
         android:backgroundTint="#FEDB64"/>
+
     <ImageView
         android:id="@+id/wrongImg"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="550dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +93,7 @@
         android:id="@+id/correctImg"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="550dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

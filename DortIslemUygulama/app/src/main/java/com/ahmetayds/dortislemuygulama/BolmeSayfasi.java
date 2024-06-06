@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class BolmeSayfasi extends AppCompatActivity {
 
     ImageView wrongImg;
     ImageView correctImg;
+    Button cevaplaButton;
 
     int sayi1;
     int sayi2;
@@ -40,7 +42,10 @@ public class BolmeSayfasi extends AppCompatActivity {
         cevapEditText = findViewById(R.id.editTextNumber);
         wrongImg = findViewById(R.id.wrongImg);
         correctImg= findViewById(R.id.correctImg);
+        cevaplaButton =findViewById(R.id.cevaplaButton);
+
         skorTextView.setText("Skor : " + skor);
+
 
         sayi1 = myRandom.nextInt(50) + 1;
         kat =  myRandom.nextInt(5) + 1;
@@ -59,13 +64,20 @@ public class BolmeSayfasi extends AppCompatActivity {
             if(Integer.parseInt(cevapEditText.getText().toString()) == cevap){
                 skor++;
                 skorTextView.setText("Skor : " + skor);
-                sayi1 = myRandom.nextInt(10);
-                sayi2 = myRandom.nextInt(10);
-                cevap = sayi1 - sayi2;
-                soruTextView.setText(sayi1 + " - "+sayi2+ " = ? ");
+                sayi1 = myRandom.nextInt(50) + 1;
+                kat =  myRandom.nextInt(5) + 1;
+                sayi2 =  sayi1 * kat;
+                cevap = sayi2 / sayi1;
+                soruTextView.setText(sayi2 + " / "+sayi1+ " = ? ");
                 cevapEditText.setText("");
 
-                new CountDownTimer(1500,100){
+                cevaplaButton.setEnabled(false);
+
+                soruTextView.setVisibility(View.INVISIBLE);
+
+
+                new CountDownTimer(700,100){
+
 
                     boolean toogle = false;
                     @Override
@@ -86,7 +98,8 @@ public class BolmeSayfasi extends AppCompatActivity {
                     public void onFinish(){
                         correctImg.setVisibility(View.INVISIBLE);
                         skorTextView.setVisibility(View.VISIBLE);
-
+                        cevaplaButton.setEnabled(true);
+                        soruTextView.setVisibility(View.VISIBLE);
                     }
                 }.start();
 
@@ -98,16 +111,19 @@ public class BolmeSayfasi extends AppCompatActivity {
 
                 skor--;
                 skorTextView.setText("Skor : " + skor);
-                sayi1 = myRandom.nextInt(10);
-                sayi2 = myRandom.nextInt(10);
-                cevap = sayi1 - sayi2;
-                soruTextView.setText(sayi1 + " - "+sayi2+ " = ? ");
+                sayi1 = myRandom.nextInt(50) + 1;
+                kat =  myRandom.nextInt(5) + 1;
+                sayi2 =  sayi1 * kat;
+                cevap = sayi2 / sayi1;
+                soruTextView.setText(sayi2 + " / "+sayi1+ " = ? ");
                 cevapEditText.setText("");
 
 
+                cevaplaButton.setEnabled(false);
+                soruTextView.setVisibility(View.INVISIBLE);
 
 
-                new CountDownTimer(1500,100){
+                new CountDownTimer(700,100){
 
                     boolean toogle = false;
                     @Override
@@ -126,7 +142,11 @@ public class BolmeSayfasi extends AppCompatActivity {
                     }
                     @Override
                     public void onFinish(){
+                        skorTextView.setVisibility(View.VISIBLE);
                         wrongImg.setVisibility(View.INVISIBLE);
+                        cevaplaButton.setEnabled(true);
+                        soruTextView.setVisibility(View.VISIBLE);
+
                     }
                 }.start();
 
