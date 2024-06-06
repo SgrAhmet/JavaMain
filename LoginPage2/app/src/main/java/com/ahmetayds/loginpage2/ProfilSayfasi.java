@@ -18,7 +18,6 @@ public class ProfilSayfasi extends AppCompatActivity {
 
         veriAlanı = findViewById(R.id.veriAlanı);
 
-//        Intent verial = getIntent();
         String gelenVeri1 =  getIntent().getStringExtra("ilkVeri");
         String gelenVeri2 =  getIntent().getStringExtra("ikinciVeri");
 

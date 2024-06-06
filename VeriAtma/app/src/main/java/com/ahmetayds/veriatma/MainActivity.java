@@ -12,8 +12,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-//    ArrayList<String> myNameList;
-//    ArrayList<Integer> myNoteList;
+
 
     ArrayList<String> myNameList = new ArrayList<String>();
     ArrayList<Integer> myNoteList = new ArrayList<Integer>();
@@ -34,20 +33,14 @@ public class MainActivity extends AppCompatActivity {
         if(IsimEditText.getText().toString().matches("") || notEditText.getText().toString().matches("")){
             Toast.makeText(this, "Lütfen Veri Girişi Yapınız", Toast.LENGTH_SHORT).show();
         }else{
-            String isim =IsimEditText.getText().toString() ;
+            String isim =IsimEditText.getText().toString();
             int note = Integer.parseInt(notEditText.getText().toString()) ;
-
             myNameList.add(isim);
             myNoteList.add(note);
-
             System.out.println(myNameList);
             System.out.println(myNoteList);
             Toast.makeText(this, isim +  " kişisi eklendi", Toast.LENGTH_SHORT).show();
-
         }
-
-
-
         IsimEditText.setText("");
         notEditText.setText("");
     }

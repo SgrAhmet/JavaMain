@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     int P1BetInt;
     int P2BetInt;
 
+
+    String innerColor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         name1= findViewById(R.id.name1);
         name2= findViewById(R.id.name2);
+
+
 
 
     }
@@ -130,18 +134,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+                                innerColor = "black";
+
                                 new CountDownTimer(1000,100){
 
                                     @Override
                                     public void onTick(long milisUntilFinshed){
 
-                                        String innerColor = "black";
 
                                         if(innerColor == "black"){
-                                            name1.setBackgroundResource(R.color.white);
+                                            System.out.println("İf1");
+                                            name1.setBackgroundResource(R.color.black);
                                             innerColor = "white";
                                         }else{
-                                            name1.setBackgroundResource(R.color.black);
+                                            System.out.println("İf2");
+                                            name1.setBackgroundResource(R.color.white);
                                             innerColor = "black";
                                         }
 
@@ -149,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     @Override
                                     public void onFinish(){
-
+                                        System.out.println("=================");
+                                        name1.setBackgroundColor(Color.TRANSPARENT);
                                     }
                                 }.start();
 
@@ -170,27 +178,23 @@ public class MainActivity extends AppCompatActivity {
                                 P1Budget.setText(Integer.toString(P1BudgetInt) + " $");
 
 
+                                innerColor = "black";
+
                                 new CountDownTimer(1000,100){
 
                                     @Override
                                     public void onTick(long milisUntilFinshed){
-
-                                        String innerColor = "white";
-
                                         if(innerColor == "black"){
-                                            name2.setBackgroundResource(R.color.white);
+                                            name2.setBackgroundResource(R.color.black);
                                             innerColor = "white";
                                         }else{
-                                            name2.setBackgroundResource(R.color.black);
+                                            name2.setBackgroundResource(R.color.white);
                                             innerColor = "black";
                                         }
-
-
                                     }
                                     @Override
                                     public void onFinish(){
-
-
+                                        name2.setBackgroundColor(Color.TRANSPARENT);
                                     }
                                 }.start();
 
