@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     Handler handler;
 
 
-    int number = 0;
+    int second = 0;
+    int minute = 0;
 
     ArrayList<String> turListe = new ArrayList<String>();
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         turButton.setEnabled(false);
         sifirlaButton.setEnabled(false);
 
-        sayacTextView.setText("Süre : "+ number);
+        sayacTextView.setText("0"+minute+" : 0"+ second);
         turTextView.setText("");
     }
 
@@ -63,9 +64,21 @@ public class MainActivity extends AppCompatActivity {
         runnable = new Runnable() {
             @Override
             public void run() {
-                handler.postDelayed(runnable,1000);
-                number++;
-                sayacTextView.setText("Süre : "+ number);
+                handler.postDelayed(runnable,100);
+                second++;
+                if(second > 60){
+                    minute++;
+                    second = second - 60;
+                }
+                if(second < 10){
+                    sayacTextView.setText("0"+minute+ " : 0"+ second);
+                }else{
+                    if(minute < 10){
+                        sayacTextView.setText("0"+minute+ " : "+ second);
+                    }else{
+                        sayacTextView.setText(""+minute+ " : "+ second);
+                    }
+                }
             }
         };
         handler.post(runnable);
@@ -73,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tur(View view){
+
+
+
         turTextView.setText("");
-        turListe.add(Integer.toString(number));
+        turListe.add(sayacTextView.getText().toString());
         for (int i = 0; i< turListe.size();i++){
 //            turTextView.setText((i+1) + ". "+ turListe.get(i) + "\n");
 
@@ -93,8 +109,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sıfırla(View view){
-        number = 0;
-        sayacTextView.setText("Süre : "+ number);
+        second = 0;
+        minute = 0;
+        sayacTextView.setText("0"+minute+" : 0"+ second);
         handler.removeCallbacks(runnable);
         sifirlaButton.setEnabled(false);
 
