@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i< turListe.size();i++){
 //            turTextView.setText((i+1) + ". "+ turListe.get(i) + "\n");
 
-            turTextView.setText(turTextView.getText().toString() + (i+1) + ". "+ turListe.get(i) + "\n");
+            turTextView.setText(turTextView.getText().toString() + (i+1) + ".  "+ turListe.get(i) + "\n");
         }
     }
 

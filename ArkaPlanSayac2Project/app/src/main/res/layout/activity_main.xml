@@ -11,15 +11,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif-black"
         android:text="TextView"
-        android:textSize="50px"
+        android:textSize="64px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="402dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_marginTop="150dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,15 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="baslat"
-            android:text="Başlat" />
-
-        <Button
-            android:id="@+id/turButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="tur"
-            android:text="Tur" />
+            android:text="Başlat"
+            app:icon="@drawable/play" />
 
         <Button
             android:id="@+id/durdurButton"
@@ -48,7 +43,41 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="durdur"
-            android:text="Durdur" />
+            android:text="Durdur"
+            app:icon="@drawable/stopbutton" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/turTextView"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:layout_marginBottom="50dp"
+        android:background="#FF9800"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center|top"
+        android:text="TextView"
+        android:textSize="64px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/turButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="tur"
+            android:text="Tur"
+            app:icon="@drawable/finish" />
 
         <Button
             android:id="@+id/sifirlaButton"
@@ -56,18 +85,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="sıfırla"
-            android:text="Sıfırla" />
+            android:text="Sıfırla"
+            app:icon="@drawable/reload" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/turTextView"
-        android:layout_width="350dp"
-        android:layout_height="400dp"
-        android:layout_marginBottom="50dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
