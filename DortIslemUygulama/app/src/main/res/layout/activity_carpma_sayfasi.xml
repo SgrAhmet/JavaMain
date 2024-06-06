@@ -68,15 +68,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:backgroundTint="#FEDB64"
+        android:fontFamily="sans-serif-black"
         android:onClick="anaSayfa"
         android:text="Ana Sayfaya Dön"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cevaplaButton"
-        app:strokeWidth="3dp"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif-black"
-        android:backgroundTint="#FEDB64"/>
+        app:strokeWidth="3dp" />
 
     <ImageView
         android:id="@+id/wrongImg"
