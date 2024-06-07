@@ -1,0 +1,24 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color myGreen
+color myRed
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id P1Bet
+id P1Budget
+id P2Bet
+id P2Budget
+id gamblingButton
+id myBackground
+id name1
+id name2
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Base.Theme.Random2
+style Theme.Random2
+xml backup_rules
+xml data_extraction_rules
