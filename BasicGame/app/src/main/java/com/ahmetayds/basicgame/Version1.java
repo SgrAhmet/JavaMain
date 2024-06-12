@@ -1,8 +1,10 @@
 package com.ahmetayds.basicgame;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.os.Handler;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -71,7 +74,7 @@ public class Version1 extends AppCompatActivity {
         int enYuksekSkor = skorTut.getInt("yuksekSkor",0);
         EnYuksekSkorTextView.setText("En Yüksek Skor : " + enYuksekSkor );
 
-        new CountDownTimer(10000,1000){
+        new CountDownTimer(1000,1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -83,6 +86,9 @@ public class Version1 extends AppCompatActivity {
             {
                 KalanSureTextView.setText("Süre Bitti");
                 handler.removeCallbacks(runnable);
+                for(ImageView resim : imageArray){
+                    resim.setVisibility(View.INVISIBLE);
+                }
 
                 SharedPreferences skorTut = Version1.this.getPreferences(Context.MODE_PRIVATE);
                 int enYuksekSkor = skorTut.getInt("yuksekSkor",0);
@@ -93,12 +99,33 @@ public class Version1 extends AppCompatActivity {
 
 
 
-                     enYuksekSkor = skorTut.getInt("yuksekSkor",0);
+                    enYuksekSkor = skorTut.getInt("yuksekSkor",0);
                     EnYuksekSkorTextView.setText("En Yüksek Skor : " + enYuksekSkor );
 
                 }
 
+                AlertDialog.Builder mesaj = new AlertDialog.Builder(Version1.this);
+                mesaj.setTitle("Yeniden Başla");
+                mesaj.setMessage("Tekrar Oynamak İster Misin?");
 
+                mesaj.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent bastanBasla = getIntent();
+                        finish();
+                        startActivity(bastanBasla);
+                    }
+                });
+
+                mesaj.setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(Version1.this, "Oyun Bitti", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+                mesaj.show();
             }
         }.start();
 
