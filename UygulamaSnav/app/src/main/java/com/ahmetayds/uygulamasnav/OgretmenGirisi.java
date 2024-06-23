@@ -18,8 +18,8 @@ public class OgretmenGirisi extends AppCompatActivity {
 
     ArrayList<OgretmenData> ogretmenDataArray = new ArrayList<>();
 
-
-
+    String[] isimler;
+    String[] sifreler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +29,20 @@ public class OgretmenGirisi extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        binding.kullanCAdiEditText.setText("mahmuttunceradmin");
+        binding.sifreEditText.setText("54321");
+
 
         OgretmenData ogretmen1 = new OgretmenData("ozlemaytekinadmin","54321");
         OgretmenData ogretmen2 = new OgretmenData("mahmuttunceradmin","54321");
 
         ogretmenDataArray.add(ogretmen1);
         ogretmenDataArray.add(ogretmen2);
+
+
+        isimler = getIntent().getStringArrayExtra("isimler");
+       sifreler = getIntent().getStringArrayExtra("sifreler");
+
 
     }
 
@@ -50,6 +58,8 @@ public class OgretmenGirisi extends AppCompatActivity {
             for (int i = 0;i< ogretmenDataArray.size();i++ ){
                 if(binding.kullanCAdiEditText.getText().toString().matches(ogretmenDataArray.get(i).kullaniciAdi.toString()) || binding.sifreEditText.getText().toString().matches(ogretmenDataArray.get(i).sifre.toString())){
                     Intent sayfayaGit = new Intent(this, OgretmenDetay.class);
+                    sayfayaGit.putExtra("isimler",isimler);
+                    sayfayaGit.putExtra("sifreler",sifreler);
                     startActivity(sayfayaGit);
                     loginChecked = true;
                 }else{

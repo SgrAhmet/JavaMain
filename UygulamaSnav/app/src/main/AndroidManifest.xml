@@ -13,6 +13,9 @@
         android:theme="@style/Theme.UygulamaSınavı"
         tools:targetApi="31">
         <activity
+            android:name=".OgretmenEkstra"
+            android:exported="false" />
+        <activity
             android:name=".OgrenciOyun"
             android:exported="false" />
         <activity

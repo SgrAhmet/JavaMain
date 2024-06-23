@@ -82,7 +82,7 @@
         android:id="@+id/PuanTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="250dp"
+        android:layout_marginBottom="300dp"
         android:text="Puan : 15"
         android:textSize="64px"
         app:layout_constraintBottom_toBottomOf="parent"
