@@ -20,13 +20,16 @@ public class normalOyun extends AppCompatActivity {
     String[] iller = {"Adana", "Adiyaman", "Afyonkarahisar", "Agri", "Amasya", "Ankara", "Antalya", "Artvin", "Aydin", "Balikesir", "Bilecik", "Bingol", "Bitlis", "Bolu", "Burdur", "Bursa", "Canakkale", "Cankiri", "Corum", "Denizli", "Diyarbakir", "Edirne", "Elazig", "Erzincan", "Erzurum", "Eskisehir", "Gaziantep", "Giresun", "Gumushane", "Hakkari", "Hatay", "Isparta", "Mersin", "Istanbul", "Izmir", "Kars", "Kastamonu", "Kayseri", "Kirklareli", "Kirsehir", "Kocaeli", "Konya", "Kutahya", "Malatya", "Manisa", "Kahramanmaras", "Mardin", "Mugla", "Mus", "Nevsehir", "Nigde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdag", "Tokat", "Trabzon", "Tunceli", "Sanliurfa", "Usak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kirikkale", "Batman", "Sirnak", "Bartin", "Ardahan", "Igdir", "Yalova", "Karabuk", "Kilis", "Osmaniye", "Duzce"};
 
     Random  myRandom = new Random();
-    String randomCity;
-    String hiddenRandomCity = "";
+    String rastgeleSehir;
+    String sehirCizgileri = "";
 //    String randomCityLetters = "";
     ArrayList<Character> randomCityLetters = new ArrayList<>();
 
+ArrayList<Character> sehirHarfleri;
 
 
+    int rastgeleHarfSıra;
+    String[] ipuculuHarfler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,62 +60,98 @@ public class normalOyun extends AppCompatActivity {
 
 
     public void sehirSec(){
-        hiddenRandomCity = "";
-//        randomCity = iller[ myRandom.nextInt(iller.length)] ;
-        randomCity = "Ankara";
-        for(int i = 0; i < randomCity.length();i++){
-            hiddenRandomCity += " *";
+
+//        hiddenRandomCity = "";
+////        randomCity = iller[ myRandom.nextInt(iller.length)] ;
+//        randomCity = "Ankara";
+//        for(int i = 0; i < randomCity.length();i++){
+//            hiddenRandomCity += " *";
+//        }
+//
+//        binding.textView2.setText(hiddenRandomCity + " " + randomCity);
+//
+//
+//
+//        for( char harf : randomCity.toCharArray()){
+//            randomCityLetters.add(harf);
+//        }
+//
+//        System.out.println(randomCityLetters);
+
+
+//        rastgeleSehir = iller[ myRandom.nextInt(iller.length)] ;
+        rastgeleSehir = "ankara";
+        for(int i = 0; i < rastgeleSehir.length();i++){
+            sehirCizgileri += " *";
+        };
+
+        sehirHarfleri = new ArrayList<>();
+        for(char harf : rastgeleSehir.toCharArray()){
+            sehirHarfleri.add(harf);
         }
 
-        binding.textView2.setText(hiddenRandomCity + " " + randomCity);
-
-
-
-        for( char harf : randomCity.toCharArray()){
-            randomCityLetters.add(harf);
-        }
-
-        System.out.println(randomCityLetters);
-
+        ipuculuHarfler = sehirCizgileri.split(" ");
 
     }
+
+
+
+
+
+//    public void harfAl(View view){
+//
+//        hiddenRandomCity = "";
+//
+//
+//
+//        String letter =  randomCityLetters.get(myRandom.nextInt(randomCityLetters.size())).toString().toLowerCase();
+//
+//        for(int i = 0 ;i < randomCity.length();i++){
+//            if(letter.toLowerCase().charAt(0) == randomCity.toLowerCase().charAt(i)){
+//                hiddenRandomCity += letter;
+//            }else{
+//                hiddenRandomCity += " *";
+//            }
+//        }
+//
+//
+//
+//        binding.textView2.setText(hiddenRandomCity + " " + randomCity);
+//
+//    }
 
 
 
 
 
     public void harfAl(View view){
+        if(sehirHarfleri.size() > 0 ){
+            rastgeleHarfSıra = myRandom.nextInt(sehirHarfleri.size());
+//            sehirHarfleri.remove(rastgeleHarfSıra);
 
-
-    ;
-
-
-        hiddenRandomCity = "";
-
-
-
-        String letter =  randomCityLetters.get(myRandom.nextInt(randomCityLetters.size())).toString().toLowerCase();
-
-        for(int i = 0 ;i < randomCity.length();i++){
-            if(letter.toLowerCase().charAt(0) == randomCity.toLowerCase().charAt(i)){
-                hiddenRandomCity += letter;
-            }else{
-                hiddenRandomCity += " *";
+            int harfSayisi = sehirHarfleri.size();
+            for (int i = 0;i<harfSayisi;i++){
+                if(rastgeleHarfSıra == i){
+                    ipuculuHarfler[i] = String.valueOf(sehirHarfleri.get(rastgeleHarfSıra));
+                }
             }
+
+            binding.sehirtext.setText("");
+            for(int i = 0 ; i< sehirHarfleri.size();i++){
+                binding.sehirtext.setText(binding.sehirtext.getText().toString()+ipuculuHarfler[i]);
+            }
+
+
+
         }
 
 
 
-        binding.textView2.setText(hiddenRandomCity + " " + randomCity);
 
     }
 
-
-
-
-
     public void guessButton(View view){
-        if(binding.editTextText.getText().toString().toLowerCase().matches(randomCity.toLowerCase())){
+        if(binding.editTextText.getText().toString().toLowerCase().matches(rastgeleSehir.toLowerCase())){
             Toast.makeText(this, "Doğru Tahmin", Toast.LENGTH_SHORT).show();
 //            Intent intent = getIntent();
 //            finish();
@@ -124,5 +163,6 @@ public class normalOyun extends AppCompatActivity {
 
         }
     }
+
 
 }

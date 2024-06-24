@@ -56,13 +56,17 @@
             android:id="@+id/button6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Harf Al" />
+            android:text="Harf Al"
+            android:onClick="sureliOyunHarfAL"
+            />
 
         <Button
             android:id="@+id/button7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tahmin Et" />
+            android:text="Tahmin Et"
+            android:onClick="sureliOyunTahminEt"
+            />
     </LinearLayout>
 
     <Button
@@ -75,6 +79,16 @@
         app:icon="@drawable/arrow"
         android:onClick="goToMainPage"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/puanTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
