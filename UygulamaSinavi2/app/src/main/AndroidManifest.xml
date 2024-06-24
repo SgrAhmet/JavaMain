@@ -13,6 +13,9 @@
         android:theme="@style/Theme.UygulamaSinavi2"
         tools:targetApi="31">
         <activity
+            android:name=".OgrenciOyun"
+            android:exported="false" />
+        <activity
             android:name=".OgrenciGirisi"
             android:exported="false" />
         <activity
