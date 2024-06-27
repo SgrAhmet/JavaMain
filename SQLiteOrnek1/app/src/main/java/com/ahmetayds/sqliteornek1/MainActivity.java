@@ -2,6 +2,8 @@ package com.ahmetayds.sqliteornek1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -35,13 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        String deneme = "def";
-
-        String deneme2 ="abc"+ ""+deneme+"";
-
-        System.out.println(deneme2);   // abcdef
-
-
 
     }
 
@@ -49,26 +44,66 @@ public class MainActivity extends AppCompatActivity {
 
     public void girisYap(View view){
 
+        String girilenKullaniciAdi = binding.kullaniciAdiText.getText().toString();
+        String girilenSifre = binding.sifreText.getText().toString();
+
+
+
+        if(girilenKullaniciAdi.isEmpty() || girilenSifre.isEmpty()){
+            Toast.makeText(this, "Kullanıcı Adı ve Şifre Boş Bırakılamaz", Toast.LENGTH_SHORT).show();
+        }else{
+            try {
+                SQLiteDatabase veriTabani = this.openOrCreateDatabase("kullanıcılar_db" ,MODE_PRIVATE,null);
+
+                Cursor cursor =veriTabani.rawQuery("SELECT * FROM kullanicilar",null);
+
+                int kullanıciAdlari = cursor.getColumnIndex("kullaniciAdi");
+                int sifreler = cursor.getColumnIndex("sifre");
+
+                Boolean isLogin = false;
+
+                while(cursor.moveToNext()){
+                    String kullanıciAdi = cursor.getString(kullanıciAdlari);
+                    String sifre = cursor.getString(sifreler);
+
+                    if(kullanıciAdi.toString().equalsIgnoreCase(girilenKullaniciAdi) && sifre.toString().equalsIgnoreCase(girilenSifre)){
+                        isLogin = true;
+                        break;
+                    }
+                }
+
+                if(isLogin){
+                    Toast.makeText(this, "Giriş Başarıyla Yapıldı", Toast.LENGTH_SHORT).show();
+
+//                    Intent sayfayaGit = new Intent(this,);
+//                    startActivity(sayfayaGit);
+                }else{
+                        Toast.makeText(this, "Kullanıcı Adı veya Şifre Yanlış", Toast.LENGTH_SHORT).show();
+                    }
+
+            }catch (Exception e){
+                Toast.makeText(this, "Bir Hata Oluştu", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
 
 
     }
 
     public void kayitOl(View view){
         String yeniKullanıciAdi = binding.kullaniciAdi2Text.getText().toString();
-        String yeniSifre = binding.kullaniciAdi2Text.getText().toString();
+        String yeniSifre = binding.sifre2Text.getText().toString();
         if(yeniKullanıciAdi.isEmpty() || yeniSifre.isEmpty()){
             Toast.makeText(this, "Kullanıcı Adı ve Şifre Boş Bırakılamaz", Toast.LENGTH_SHORT).show();
         }else{
-
-
             try {
                 SQLiteDatabase veriTabani = this.openOrCreateDatabase("kullanıcılar_db" ,MODE_PRIVATE,null);
-
                 veriTabani.execSQL("INSERT INTO kullanicilar (kullaniciAdi,sifre)VALUES('" + yeniKullanıciAdi+"','"+yeniSifre+"')");
-
-
                 Toast.makeText(this, "Kullanıcı Başarıyla Oluşturuldu", Toast.LENGTH_SHORT).show();
 
+                binding.kullaniciAdi2Text.setText("");
+                binding.sifre2Text.setText("");
             }catch (Exception e){
                 Toast.makeText(this, "Bir Hata Oluştu", Toast.LENGTH_SHORT).show();
             }
