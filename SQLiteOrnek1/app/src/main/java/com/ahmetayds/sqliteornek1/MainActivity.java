@@ -31,6 +31,24 @@ public class MainActivity extends AppCompatActivity {
             SQLiteDatabase veriTabani = this.openOrCreateDatabase("kullanıcılar_db" ,MODE_PRIVATE,null);
             veriTabani.execSQL("CREATE TABLE IF NOT EXISTS kullanicilar (id INTEGER PRIMARY KEY AUTOINCREMENT, kullaniciAdi VARCHAR(50),sifre VARCHAR(50))");
 
+            Cursor cursor =veriTabani.rawQuery("SELECT * FROM kullanicilar",null);
+
+            int kullanıciAdlari = cursor.getColumnIndex("kullaniciAdi");
+            int sifreler = cursor.getColumnIndex("sifre");
+
+
+
+            while(cursor.moveToNext()){
+                String kullanıciAdi = cursor.getString(kullanıciAdlari);
+                String sifre = cursor.getString(sifreler);
+
+                System.out.println("===============================");
+                System.out.println("kullanici Adi : " + kullanıciAdi);
+                System.out.println("sifre  : " + sifre);
+                System.out.println("===============================");
+
+            }
+
         }catch (Exception e){
             Toast.makeText(this, "Bir Hata Oluştu", Toast.LENGTH_SHORT).show();
         };
