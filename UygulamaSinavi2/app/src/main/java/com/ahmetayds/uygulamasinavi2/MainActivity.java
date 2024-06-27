@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     public void ogretmenGirisiGit(View view){
         Intent sayfayaGit = new Intent(this, OgretmenGirisi.class);
         startActivity(sayfayaGit);
