@@ -10,15 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08991f39-599b-4e23-8057-05157a0a898b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BasicGame/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BasicGame/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BasicGame/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BasicGame/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BasicGame/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../BasicGame/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BasicGame/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BasicGame/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BasicGame/app/src/main/java/com/ahmetayds/basicgame/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../BasicGame/app/src/main/java/com/ahmetayds/basicgame/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BasicGame/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BasicGame/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQLiteOrnek1/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SQLiteOrnek1/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQLiteOrnek1/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SQLiteOrnek1/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQLiteOrnek1/app/src/main/java/com/ahmetayds/sqliteornek1/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SQLiteOrnek1/app/src/main/java/com/ahmetayds/sqliteornek1/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQlLiteOrnek2/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SQlLiteOrnek2/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQlLiteOrnek2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SQlLiteOrnek2/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +88,7 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/LENOVO/Documents/workspace/deneme/BasicGame"
+    "last_opened_file_path": "C:/Users/LENOVO/Documents/workspace/deneme/Random2"
   }
 }]]></component>
   <component name="RunManager">

@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 if(isLogin){
                     Toast.makeText(this, "Giriş Başarıyla Yapıldı", Toast.LENGTH_SHORT).show();
 
-//                    Intent sayfayaGit = new Intent(this,);
-//                    startActivity(sayfayaGit);
+                    Intent sayfayaGit = new Intent(this, ProfilSayfasi.class);
+                    startActivity(sayfayaGit);
                 }else{
                         Toast.makeText(this, "Kullanıcı Adı veya Şifre Yanlış", Toast.LENGTH_SHORT).show();
                     }
