@@ -16,6 +16,9 @@ public class girisEkrani extends AppCompatActivity {
 
     private ActivityGirisEkraniBinding binding;
 
+    String adminKullaniciAdi = "admin";
+    String  adminSifre = "123";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,39 +34,47 @@ public class girisEkrani extends AppCompatActivity {
 
 
     public void girisKontrol(View view){
+
+
         String girilenKullaniciAdi = binding.editTextText.getText().toString();
         String girilenSifre = binding.editTextTextPassword2.getText().toString();
 
         if(girilenKullaniciAdi.isEmpty() || girilenSifre.isEmpty()){
             Toast.makeText(this, "Kullanıcı Adı veya Şifre Boş Bırakılamaz", Toast.LENGTH_SHORT).show();
         }else {
-            try {
-                SQLiteDatabase veriTabani = this.openOrCreateDatabase("kullanıcılar_db" ,MODE_PRIVATE,null);
-                Cursor cursor =veriTabani.rawQuery("SELECT * FROM kullanicilar",null);
-                int kullanıciAdlari = cursor.getColumnIndex("kullaniciAdi");
-                int sifreler = cursor.getColumnIndex("sifre");
 
-                Boolean isLogin = false;
+            if(girilenKullaniciAdi.equals(adminKullaniciAdi) && girilenSifre.equals(adminSifre)){
+                startActivity(new Intent(this, adminSayfasi.class));
+                Toast.makeText(this, "Admin Giriş Yaptı", Toast.LENGTH_SHORT).show();
+            }else{
+                try {
+                    SQLiteDatabase veriTabani = this.openOrCreateDatabase("kullanıcılar_db" ,MODE_PRIVATE,null);
+                    Cursor cursor =veriTabani.rawQuery("SELECT * FROM kullanicilar",null);
+                    int kullanıciAdlari = cursor.getColumnIndex("kullaniciAdi");
+                    int sifreler = cursor.getColumnIndex("sifre");
 
-                while(cursor.moveToNext()){
-                    String kullanıciAdi = cursor.getString(kullanıciAdlari);
-                    String sifre = cursor.getString(sifreler);
+                    Boolean isLogin = false;
 
-                    if(kullanıciAdi.toString().equalsIgnoreCase(girilenKullaniciAdi) && sifre.toString().equalsIgnoreCase(girilenSifre)){
-                        isLogin = true;
-                        break;
+                    while(cursor.moveToNext()){
+                        String kullanıciAdi = cursor.getString(kullanıciAdlari);
+                        String sifre = cursor.getString(sifreler);
+
+                        if(kullanıciAdi.toString().equalsIgnoreCase(girilenKullaniciAdi) && sifre.toString().equalsIgnoreCase(girilenSifre)){
+                            isLogin = true;
+                            break;
+                        }
                     }
+
+                    if(isLogin){
+                        Toast.makeText(this, "Giriş Başarıyla Yapıldı", Toast.LENGTH_SHORT).show();
+                        profilSayfasiGit(girilenKullaniciAdi,girilenSifre);
+                    }else{
+                        Toast.makeText(this, "Kullanıcı Adı veya Şifre Yanlış", Toast.LENGTH_SHORT).show();
+                    }
+
+                }catch (Exception e){
+                    Toast.makeText(this, "Bir Hata Oluştı!", Toast.LENGTH_SHORT).show();
                 }
-
-                if(isLogin){
-                    Toast.makeText(this, "Giriş Başarıyla Yapıldı", Toast.LENGTH_SHORT).show();
-                    profilSayfasiGit(girilenKullaniciAdi,girilenSifre);
-                }else{
-                    Toast.makeText(this, "Kullanıcı Adı veya Şifre Yanlış", Toast.LENGTH_SHORT).show();
-                }
-
-            }catch (Exception e){
-
             }
 
 
@@ -71,7 +82,10 @@ public class girisEkrani extends AppCompatActivity {
 
 
 
+
         }
+
+
 
     }
     public void geriGit (View view){

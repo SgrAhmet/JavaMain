@@ -51,6 +51,7 @@ public class kayitEkrani extends AppCompatActivity {
             binding.editTextText4.setText("");
             binding.editTextTextPassword.setText("");
             binding.editTextTextEmailAddress.setText("");
+            binding.editTextPhone.setText("");
 
 
 
