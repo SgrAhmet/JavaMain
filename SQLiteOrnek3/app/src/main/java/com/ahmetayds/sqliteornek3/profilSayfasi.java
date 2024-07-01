@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -13,8 +14,27 @@ import com.ahmetayds.sqliteornek3.databinding.ActivityProfilSayfasiBinding;
 
 public class profilSayfasi extends AppCompatActivity {
 
-    private ActivityProfilSayfasiBinding binding;
+    int[] widgetGroup1 = {R.id.view,R.id.evetButton,R.id.hayırButton,R.id.textView21};
+    int[] widgetGroup2 = {
+            R.id.button5,
+            R.id.textView3,
+            R.id.textView4,
+            R.id.textView5,
+            R.id.textView6,
+            R.id.textView7,
+            R.id.textView8,
+            R.id.imageView,
+            R.id.textView10,
+            R.id.textView11,
+            R.id.textView17,
+            R.id.textView18,
+            R.id.textView19,
+            R.id.textView20,
+            R.id.imageView2
+    };
 
+    private ActivityProfilSayfasiBinding binding;
+    Boolean IsAdmin;
     String girilenKullaniciAdi;
     String girilenSifre ;
     String girilenIsim ;
@@ -33,6 +53,14 @@ public class profilSayfasi extends AppCompatActivity {
 
 
          girilenKullaniciAdi = getIntent().getStringExtra("girilenKullaniciAdi");
+         IsAdmin = getIntent().getBooleanExtra("IsAdmin",false);
+
+        System.out.println("Is Admin : " + IsAdmin);
+
+
+        if (IsAdmin){
+            binding.button5.setText("Geri Git");
+        }
 
 
 
@@ -91,11 +119,23 @@ public class profilSayfasi extends AppCompatActivity {
         binding.textView8.setText(girilenTelefon);
 
 
+
+
+
+
+
+
     }
 
 
     public void geriGit (View view){
-        startActivity(new Intent(this, MainActivity.class));
+
+        if(IsAdmin){
+            startActivity(new Intent(this, adminSayfasi.class));
+        }else{
+            startActivity(new Intent(this, MainActivity.class));
+        }
+
     }
 
     public void düzenlemeSayfasiGit(View view){
@@ -103,4 +143,68 @@ public class profilSayfasi extends AppCompatActivity {
         sayfayaGit.putExtra("girilenKullaniciAdi",girilenKullaniciAdi);
         startActivity(sayfayaGit);
     }
+
+    public void deleteImg(View view){
+        closeGroup2();
+        openGroup1();
+    }
+
+    public void hayırButton(View view){
+        closeGroup1();
+        openGroup2();
+    }
+
+    public void evetButton(View view){
+        kullaniciSil();
+        geriGit(view);
+    }
+
+
+
+//=========================Kullanıcı Silme====================
+
+    public void kullaniciSil(){
+
+        try {
+
+            SQLiteDatabase veriTabani = this.openOrCreateDatabase("kullanıcılar_db" ,MODE_PRIVATE,null);
+
+            veriTabani.execSQL("DELETE FROM kullanicilar WHERE kullaniciAdi = '" + girilenKullaniciAdi + "'");
+
+
+        }catch (Exception e){
+            Toast.makeText(this, "Bir Hata Oluştu!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+//========================================================
+    public void closeGroup1(){
+        for (int id : widgetGroup1) {
+            View view = findViewById(id);
+            view.setVisibility(View.INVISIBLE);
+        }
+    }
+    public void openGroup1(){
+        for (int id : widgetGroup1) {
+            View view = findViewById(id);
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+    public void closeGroup2(){
+        for (int id : widgetGroup2) {
+            View view = findViewById(id);
+            view.setVisibility(View.INVISIBLE);
+        }
+    }
+    public void openGroup2(){
+        for (int id : widgetGroup2) {
+            View view = findViewById(id);
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+//========================================================
+
+
+
 }

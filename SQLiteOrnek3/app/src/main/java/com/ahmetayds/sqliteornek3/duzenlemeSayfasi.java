@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Toast;
 
@@ -114,6 +115,12 @@ public class duzenlemeSayfasi extends AppCompatActivity {
             girilenKullaniciAdi = yeniKullaniciAdi;
 
             Toast.makeText(this, "Kullanıcı Bilgileri Güncellendi", Toast.LENGTH_SHORT).show();
+
+            Intent sayfayaGit = new Intent(this,profilSayfasi.class);
+            sayfayaGit.putExtra("girilenKullaniciAdi",girilenKullaniciAdi);
+            startActivity(sayfayaGit);
+
+
 
 
         }catch (Exception e){

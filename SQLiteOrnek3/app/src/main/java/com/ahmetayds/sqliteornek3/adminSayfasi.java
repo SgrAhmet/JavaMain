@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -52,6 +53,17 @@ public class adminSayfasi extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(this, "Bir Hata Oluştu!", Toast.LENGTH_SHORT).show();
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent sayfayaGit = new Intent(adminSayfasi.this, profilSayfasi.class);
+                sayfayaGit.putExtra("girilenKullaniciAdi",kullaniciIsimleri.get(position));
+                sayfayaGit.putExtra("IsAdmin",true);
+                startActivity(sayfayaGit);
+            }
+        });
 
 
 

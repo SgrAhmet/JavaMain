@@ -15,7 +15,7 @@
         android:backgroundTint="#E86666"
         android:onClick="geriGit"
         android:text="Çıkış Yap"
-        app:icon="@drawable/arrow"
+        app:icon="@drawable/door"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".profilSayfasi">
 
 
@@ -16,7 +17,7 @@
         android:backgroundTint="#E86666"
         android:onClick="geriGit"
         android:text="Çıkış Yap"
-        app:icon="@drawable/arrow"
+        app:icon="@drawable/door"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,9 +94,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:onClick="düzenlemeSayfasiGit"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/edit" />
 
@@ -170,6 +171,72 @@
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:onClick="deleteImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/trash" />
+
+
+
+<!--    =================================================================-->
+    <View
+        android:id="@+id/view"
+        android:layout_width="390dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="204dp"
+        android:background="#8B2626"
+        android:backgroundTint="#2196F3"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/evetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#D63131"
+        android:text="Evet"
+        android:visibility="invisible"
+        android:onClick="evetButton"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/hayırButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#7EBF34"
+        android:text="Hayır"
+        android:visibility="invisible"
+        android:onClick="hayırButton"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/evetButton" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Kullanıcıyı Silmek İstediğinize Emin Misiniz?"
+        android:textSize="50px"
+        android:visibility="invisible"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
