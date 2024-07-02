@@ -5,9 +5,12 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ahmetayds.marketotomasyonu.databinding.ActivityUrunDetayBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.security.Permission;
 
@@ -69,7 +73,17 @@ public class urunDetay extends AppCompatActivity {
         izinLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
             @Override
             public void onActivityResult(Boolean o) {
-                Ssytem;
+
+                if(o){
+// ====================İZİN VERİLDİ=============================================
+                   Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                   galeriLauncher.launch(galeriyeGit);
+                }else {
+// ====================İZİN VERİLMEDİ===========================================
+                    Toast.makeText(urunDetay.this, "Galeri İzini Verilmemiştir", Toast.LENGTH_SHORT).show();
+                }
+//                Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                galeriLauncher.launch(galeriyeGit);
             }
         });
 
@@ -90,7 +104,47 @@ public class urunDetay extends AppCompatActivity {
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
 
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                // İzin verilmemişse buraya girilecek kod
+
+                Snackbar.make(view,"Galeri İzni Vermeniz Gerekmektedir.",Snackbar.LENGTH_INDEFINITE).setAction("İzin Ver",new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        izinLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
+                    }
+                }).show();
+
+
+
+            }else{
+
+                // İzin verilmişse buraya girilecek kod
+                Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                galeriLauncher.launch(galeriyeGit);
+            }
+
+
+
+
         }else{
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                // İzin verilmemişse buraya girilecek kod
+
+                Snackbar.make(view,"Galeri İzni Vermeniz Gerekmektedir.",Snackbar.LENGTH_INDEFINITE).setAction("İzin Ver",new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        izinLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    }
+                }).show();
+
+
+            }else{
+                // İzin verilmişse buraya girilecek kod
+                Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                galeriLauncher.launch(galeriyeGit);
+
+            }
 
         }
 
@@ -98,6 +152,10 @@ public class urunDetay extends AppCompatActivity {
 
     }
 
+
+//    public Bitmap resimKucult(Bitmap gorsel,int maximumBoyut) {
+//        return ;
+//    }
 
     public void geriGit(View view){
         startActivity(new Intent(this, urunler.class));
