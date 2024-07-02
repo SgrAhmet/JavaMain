@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:backgroundTint="#C66F6F"
-        android:text="Geri Git"
+        android:backgroundTint="#EA6868"
         android:onClick="geriGit"
+        android:text="Geri Git"
         app:icon="@drawable/arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -73,9 +73,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="Kaydet"
+        android:onClick="urunuKaydet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stokText" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

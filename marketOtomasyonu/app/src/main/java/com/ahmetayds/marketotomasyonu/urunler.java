@@ -16,6 +16,7 @@ public class urunler extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_urunler);
+
         binding = ActivityUrunlerBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -26,4 +27,10 @@ public class urunler extends AppCompatActivity {
     public void yeniUrun(View view){
         startActivity(new Intent(this, urunDetay.class));
     }
+    public void cıkısYap(View view){
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+
+
 }
