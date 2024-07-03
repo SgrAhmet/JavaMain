@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             SQLiteDatabase veriTabani = this.openOrCreateDatabase("market_db",MODE_PRIVATE,null);
-            veriTabani.execSQL("CREATE TABLE IF NOT EXISTS urunler (id INTEGER PRIMARY KEY AUTOINCREMENT ,urunAdi VARCHAR(50), urunFiyati VARCHAR(50), stokAdedi INTEGER)");
+            veriTabani.execSQL("CREATE TABLE IF NOT EXISTS urunler (id INTEGER PRIMARY KEY AUTOINCREMENT ,urunAdi VARCHAR(50), urunFiyati VARCHAR(50), stokAdedi INTEGER,gorsel BLOB)");
             veriTabani.execSQL("CREATE TABLE IF NOT EXISTS kullanicilar (id INTEGER PRIMARY KEY AUTOINCREMENT ,kullaniciAdi VARCHAR(50), sifre VARCHAR(50))");
 
             Cursor imlec = veriTabani.rawQuery("SELECT * FROM kullanicilar" , null);

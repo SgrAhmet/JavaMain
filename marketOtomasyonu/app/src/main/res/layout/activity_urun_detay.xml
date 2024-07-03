@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".urunDetay">
 
+
+
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
@@ -77,8 +79,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stokText" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,8 +9,11 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 import com.ahmetayds.marketotomasyonu.databinding.ActivityUrunDetayBinding;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.ByteArrayOutputStream;
 import java.security.Permission;
 
 public class urunDetay extends AppCompatActivity {
@@ -74,30 +78,39 @@ public class urunDetay extends AppCompatActivity {
             @Override
             public void onActivityResult(Boolean o) {
 
-                if(o){
-// ====================İZİN VERİLDİ=============================================
-                   Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                   galeriLauncher.launch(galeriyeGit);
-                }else {
-// ====================İZİN VERİLMEDİ===========================================
-                    Toast.makeText(urunDetay.this, "Galeri İzini Verilmemiştir", Toast.LENGTH_SHORT).show();
-                }
-//                Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                galeriLauncher.launch(galeriyeGit);
+//                if(o){
+//// ====================İZİN VERİLDİ=============================================
+//                   Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                   galeriLauncher.launch(galeriyeGit);
+//                }else {
+//// ====================İZİN VERİLMEDİ===========================================
+//                    Toast.makeText(urunDetay.this, "Galeri İzini Verilmemiştir", Toast.LENGTH_SHORT).show();
+//                }
+                Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                galeriLauncher.launch(galeriyeGit);
             }
         });
 
 
 
 
+
+
+
+
+        Intent gelenVeri = getIntent();
+        String urunAdi =gelenVeri.getStringExtra("urunAdi");
+
+        System.out.println(urunAdi);
+
+        Toast.makeText(this, urunAdi, Toast.LENGTH_SHORT).show();
+
+
     }
 
 
 
 
-    public void urunuKaydet (View view){
-
-    }
 
 
     public void resimSec (View view){
@@ -153,9 +166,81 @@ public class urunDetay extends AppCompatActivity {
     }
 
 
-//    public Bitmap resimKucult(Bitmap gorsel,int maximumBoyut) {
-//        return ;
-//    }
+    public Bitmap resimKucult(Bitmap gorsel,int maximumBoyut) {
+        int genislik = gorsel.getWidth();
+        int yukseklik = gorsel.getHeight();
+        float oran =(float) genislik / (float) yukseklik;
+
+        if(genislik>yukseklik){
+// ====================Yatay Resim
+            genislik = maximumBoyut;
+            yukseklik=(int)(genislik/oran);
+        }else{
+// ====================Dikey Resim
+
+            yukseklik = maximumBoyut;
+            genislik=(int)(yukseklik/oran);
+
+        }
+
+        return  Bitmap.createScaledBitmap(gorsel,genislik,yukseklik,true);
+    }
+
+
+
+
+    public void urunuKaydet (View view){
+
+        String urunAdi = binding.urunAdiText.getText().toString();
+        int fiyat = Integer.parseInt(binding.fiyatText.getText().toString());
+        int stok = Integer.parseInt(binding.stokText.getText().toString());
+
+        Bitmap kucukResim = resimKucult(secilenGorsel,300);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        kucukResim.compress(Bitmap.CompressFormat.PNG,50,outputStream);
+        byte[] resimDizisi = outputStream.toByteArray();
+
+
+        try {
+
+            SQLiteDatabase veriTabani = this.openOrCreateDatabase("market_db", MODE_PRIVATE,null);
+        String sql = "INSERT INTO urunler(urunAdi,urunFiyati,stokAdedi,gorsel) VALUES(?,?,?,?)";
+        SQLiteStatement sqlDurum = veriTabani.compileStatement(sql);
+
+
+
+            sqlDurum.bindString(1, urunAdi);
+            sqlDurum.bindLong(2, fiyat);
+            sqlDurum.bindLong(3, stok);
+            sqlDurum.bindBlob(4, resimDizisi);
+
+            // Sorguyu çalıştırma
+            sqlDurum.execute();
+
+            Toast.makeText(this, "Ürün başarıyla eklendi", Toast.LENGTH_SHORT).show();
+
+            Intent urunlereGit = new Intent(urunDetay.this,urunler.class);
+            urunlereGit.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(urunlereGit);
+
+
+
+        }catch (Exception e){
+            Toast.makeText(this, "Bir Hata Oluştu", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
+//        if(urunAdi.matches("") || (binding.fiyatText.getText().toString().matches("") ||binding.stokText.getText().toString().matches("") )){
+//            Toast.makeText(this, "Hiçbir Alan Boş Bırakılamaz", Toast.LENGTH_SHORT).show();
+//        }
+
+
+
+    }
 
     public void geriGit(View view){
         startActivity(new Intent(this, urunler.class));
