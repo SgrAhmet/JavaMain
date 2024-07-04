@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -12,15 +13,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ExpandableListAdapter;
 import android.widget.Toast;
 
 import com.ahmetayds.marketotomasyonu.databinding.ActivityUrunDetayBinding;
@@ -38,6 +42,9 @@ public class urunDetay extends AppCompatActivity {
     Bitmap secilenGorsel;
 
     public ActivityUrunDetayBinding binding;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,15 +102,40 @@ public class urunDetay extends AppCompatActivity {
 
 
 
-
-
-
         Intent gelenVeri = getIntent();
-        String urunAdi =gelenVeri.getStringExtra("urunAdi");
+        Boolean gelisSebebi = getIntent().getBooleanExtra("gelisSebebi",false);
 
-        System.out.println(urunAdi);
+        if (gelisSebebi){
+//==================================================================================================
+            String gelenUrunAdi =gelenVeri.getStringExtra("urunAdi");
+            String gelenUrunFiyati =gelenVeri.getStringExtra("gidecekUrunFiyati");
+            String gelenStok =gelenVeri.getStringExtra("gidecekStogu");
+//==================================================================================================
+            binding.urunAdiText.setText(gelenUrunAdi);
+            binding.fiyatText.setText(gelenUrunFiyati);
+            binding.stokText.setText(gelenStok);
+//==================================================================================================
+            byte[] gelenUrunGorseli = getIntent().getByteArrayExtra("gidecekUrunGorseli");
+            Bitmap olusanGorsel = BitmapFactory.decodeByteArray(gelenUrunGorseli,0,gelenUrunGorseli.length);
+            binding.gorsel.setImageBitmap(olusanGorsel);
+//==================================================================================================
+            binding.button3.setVisibility(View.INVISIBLE);
+//==================================================================================================
+            binding.urunAdiText.setEnabled(false);
+            binding.fiyatText.setEnabled(false);
+            binding.stokText.setEnabled(false);
 
-        Toast.makeText(this, urunAdi, Toast.LENGTH_SHORT).show();
+            binding.gorsel.setAlpha(150);
+//==================================================================================================
+
+            binding.deleteButton.setVisibility(View.VISIBLE);
+            binding.editButton.setVisibility(View.VISIBLE);
+
+
+        }else {
+//            toast("urunlerden gelmedi",true);
+
+        }
 
 
     }
@@ -115,51 +147,46 @@ public class urunDetay extends AppCompatActivity {
 
     public void resimSec (View view){
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+        Intent gelenVeri = getIntent();
+        Boolean gelisSebebi = gelenVeri.getBooleanExtra("gelisSebebi",false);
 
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
-                // İzin verilmemişse buraya girilecek kod
+        if(!gelisSebebi){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
 
-                Snackbar.make(view,"Galeri İzni Vermeniz Gerekmektedir.",Snackbar.LENGTH_INDEFINITE).setAction("İzin Ver",new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        izinLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
-                    }
-                }).show();
-
-
-
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                    // İzin verilmemişse buraya girilecek kod
+                    Snackbar.make(view,"Galeri İzni Vermeniz Gerekmektedir.",Snackbar.LENGTH_INDEFINITE).setAction("İzin Ver",new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            izinLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
+                        }
+                    }).show();
+                }else{
+                    // İzin verilmişse buraya girilecek kod
+                    Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    galeriLauncher.launch(galeriyeGit);
+                }
             }else{
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    // İzin verilmemişse buraya girilecek kod
 
-                // İzin verilmişse buraya girilecek kod
-                Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                galeriLauncher.launch(galeriyeGit);
-            }
+                    Snackbar.make(view,"Galeri İzni Vermeniz Gerekmektedir.",Snackbar.LENGTH_INDEFINITE).setAction("İzin Ver",new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            izinLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+                        }
+                    }).show();
+                }else{
+                    // İzin verilmişse buraya girilecek kod
+                    Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    galeriLauncher.launch(galeriyeGit);
 
-
-
-
-        }else{
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                // İzin verilmemişse buraya girilecek kod
-
-                Snackbar.make(view,"Galeri İzni Vermeniz Gerekmektedir.",Snackbar.LENGTH_INDEFINITE).setAction("İzin Ver",new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        izinLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
-                    }
-                }).show();
-
-
-            }else{
-                // İzin verilmişse buraya girilecek kod
-                Intent galeriyeGit = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                galeriLauncher.launch(galeriyeGit);
+                }
 
             }
-
         }
+
+
 
 
 
@@ -218,7 +245,9 @@ public class urunDetay extends AppCompatActivity {
             // Sorguyu çalıştırma
             sqlDurum.execute();
 
-            Toast.makeText(this, "Ürün başarıyla eklendi", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Ürün başarıyla eklendi", Toast.LENGTH_SHORT).show();
+
+            toast("Ürün Başarıyla Eklendi",true);
 
             Intent urunlereGit = new Intent(urunDetay.this,urunler.class);
             urunlereGit.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -242,7 +271,45 @@ public class urunDetay extends AppCompatActivity {
 
     }
 
+
+    public void urunEdit(View view){
+        toast("edit urun", true);
+    }
+
+    public void urunSil(View view){
+        Intent gelenVeri = getIntent();
+        Integer gidecekId = gelenVeri.getIntExtra("gidecekUrunId",-1);
+
+        toast(String.valueOf(gidecekId),true);
+
+
+        try {
+
+            SQLiteDatabase veriTabani = this.openOrCreateDatabase("market_db" ,MODE_PRIVATE,null);
+            veriTabani.execSQL("DELETE FROM urunler WHERE id = " + gidecekId );
+
+            Intent sayfayaGit = new Intent(this, urunler.class);
+            startActivity(sayfayaGit);
+
+        }catch (Exception e){
+            toast("Bir Hata Oluştu!",true);
+        }
+
+
+    }
+
     public void geriGit(View view){
         startActivity(new Intent(this, urunler.class));
     }
+
+
+    public void toast(String myString, @NonNull Boolean isShort){
+        if (isShort){
+            Toast.makeText(this, myString, Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, myString, Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 }
