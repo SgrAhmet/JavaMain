@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "676186535864",
+    "project_id": "hastaneotomasyon-def0f",
+    "storage_bucket": "hastaneotomasyon-def0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676186535864:android:0465e8e1a36c132148c14d",
+        "android_client_info": {
+          "package_name": "com.ahmetayds.hastaneuygulamasi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxNhCNAyOicjp7BXuCLgBqxlWhmV-TUCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

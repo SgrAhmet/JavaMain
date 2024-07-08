@@ -178,18 +178,18 @@ public class profilSayfasi extends AppCompatActivity {
     }
 
 
-//========================================================
+//============================================================
     public void closeGroup1(){
         for (int id : widgetGroup1) {
             View view = findViewById(id);
             view.setVisibility(View.INVISIBLE);
         }
     }
+
     public void openGroup1(){
         for (int id : widgetGroup1) {
             View view = findViewById(id);
-            view.setVisibility(View.VISIBLE);
-        }
+            view.setVisibility(View.VISIBLE);}
     }
     public void closeGroup2(){
         for (int id : widgetGroup2) {
@@ -203,8 +203,7 @@ public class profilSayfasi extends AppCompatActivity {
             view.setVisibility(View.VISIBLE);
         }
     }
-//========================================================
-
+//============================================================
 
 
 }
