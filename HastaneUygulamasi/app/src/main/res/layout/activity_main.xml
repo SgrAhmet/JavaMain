@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E3ECEE"
     tools:context=".MainActivity">
 
     <ImageView
@@ -19,13 +20,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/_85809807996bcc" />
 
+<!--    <View-->
+<!--        android:id="@+id/view"-->
+<!--        android:layout_width="450dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginTop="61dp"-->
+<!--        android:background="#F64E67"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/imageView" />-->
+
+
     <View
         android:id="@+id/view"
-        android:layout_width="450dp"
+        android:layout_width="225dp"
         android:layout_height="15dp"
-        android:layout_marginTop="55dp"
-        android:background="#F64E67"
+        android:layout_marginTop="61dp"
+        android:background="#FE405C"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="225dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="61dp"
+        android:background="#C20047"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
@@ -46,6 +70,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
+        android:background="@drawable/border"
+        android:hint="E-mail"
+        android:padding="10dp"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +83,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:padding="10dp"
+        android:background="@drawable/border"
         android:ems="10"
+        android:hint="Şifre"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +136,8 @@
             android:textSize="40px"
             android:textStyle="bold|italic" />
     </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
