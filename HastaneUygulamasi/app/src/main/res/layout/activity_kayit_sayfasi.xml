@@ -114,7 +114,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/border"
         android:elevation="10dp"
-        android:padding="8dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kayitSoyisimText" />

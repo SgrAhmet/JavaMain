@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -45,13 +46,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
 
-        doktorHastaneKayıt();
+
+        firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+
 
         TextView textView = findViewById(R.id.textView6);
         textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        auth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
+        yukleme();
 
     }
 
@@ -69,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
             auth.signInWithEmailAndPassword(mail,sifre).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    toast("başarılı");
+                    toast("Giriş Başarılı");
+                    startActivity(new Intent(MainActivity.this, hastaAnaSayfa.class));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -129,7 +134,20 @@ public class MainActivity extends AppCompatActivity {
         firestore.collection("doktorlar").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error != null){
+                    Toast.makeText(MainActivity.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                int i = 0;
+                for(DocumentSnapshot dokuman : value.getDocuments()){
+                    i++;
 
+//  ============================??????????????????????????????============================
+                }
+
+                if(i == 0){
+                    doktorHastaneKayıt();
+                }
             }
         });
 
