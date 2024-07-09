@@ -16,6 +16,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class kayitSayfasi extends AppCompatActivity {
 
@@ -23,6 +28,7 @@ public class kayitSayfasi extends AppCompatActivity {
 
     private FirebaseAuth auth;
 
+    private FirebaseFirestore firestore;
 
     String[] sehirler = {
              "Şehir Seçiniz...", "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara",
@@ -52,11 +58,11 @@ public class kayitSayfasi extends AppCompatActivity {
         setContentView(view);
 
         auth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
 
 
-        ArrayAdapter adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, sehirler);
+        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, sehirler);
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.sehirSpinner.setAdapter(adapter);
 
@@ -87,11 +93,31 @@ public class kayitSayfasi extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(mail,sifre).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-//                        BAŞARILI
+// ===================================BAŞARILI
+                        HashMap<String, Object> veriKaydet = new HashMap<>();
 
-                        Intent giriseDon = new Intent(kayitSayfasi.this, MainActivity.class);
-                        startActivity(giriseDon);
-                        finish();
+                        veriKaydet.put("mail",mail);
+                        veriKaydet.put("sifre",sifre);
+                        veriKaydet.put("isim",isim);
+                        veriKaydet.put("soyisim",soyisim);
+                        veriKaydet.put("sehir",sehir);
+
+                        firestore.collection("hastalar").add(veriKaydet).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                toast("Kayıt Başarılı");
+                                Intent giriseDon = new Intent( kayitSayfasi.this, MainActivity.class);
+                                startActivity(giriseDon);
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(kayitSayfasi.this, "Hasta Kaydı Yapılamadı", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -106,6 +132,18 @@ public class kayitSayfasi extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void geriGit(View view){
         startActivity(new Intent(this, MainActivity.class));

@@ -1,6 +1,7 @@
 package com.ahmetayds.hastaneuygulamasi;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,11 +19,21 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     private FirebaseAuth auth;
+    public FirebaseFirestore firestore;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +44,14 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+
+        doktorHastaneKayıt();
+
         TextView textView = findViewById(R.id.textView6);
         textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         auth = FirebaseAuth.getInstance();
-
+        firestore = FirebaseFirestore.getInstance();
 
     }
 
@@ -60,14 +74,67 @@ public class MainActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    toast("Kulanıcı Adı yada Şifre Yanlış");
-//                    Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//                    toast("Kulanıcı Adı yada Şifre Yanlış");
+                    Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
         }
 
     }
+
+
+    public void doktorHastaneKayıt(){
+        String[] hastaneler ={"Ankara Üniversitesi Hastanesi" , "Gazi Üniversitesi Hastanesi","Hacettepe Üniversitesi Hastanesi","İbn-i Sina Hastanesi"};
+        String[] bolumler = {"Ortopedi","Nöroloji","Dermatoloji","Dahiliye","Psikiyatri"};
+        String[] doktorlar = {
+                "Prof. Dr. Ayşe Yılmaz", "Op. Dr. Mehmet Aksoy", "Doç. Dr. Zeynep Kaya",
+                "Uzm. Dr. Mustafa Demir", "Dr. Elif Korkmaz", "Prof. Dr. Ali Çelik",
+                "Uzm. Dr. Fatma Öztürk", "Dr. Emre Yıldırım", "Doç. Dr. Aylin Şahin",
+                "Prof. Dr. Taksim Delisi Cenk", "Prof. Dr. Nihan Akın", "Uzm. Dr. Mahmut Tuncer",
+                "Dr. Melis Çetin", "Prof. Dr. Ertan Yılmaz", "Doç. Dr. Sema Başar",
+                "Op. Dr. Serkan Yıldız", "Uzm. Dr. Ayşe Nur", "Dr. Mehmet Yılmaz",
+                "Prof. Dr. Selin Demir", "Op. Dr. Yıldız Tilbe "
+        };
+
+        for(int i = 0;i<doktorlar.length;i++){
+
+            HashMap<String,Object> veriKaydet = new HashMap<>();
+            veriKaydet.put("doktorAdi",doktorlar[i]);
+            veriKaydet.put("hastane",hastaneler[i%hastaneler.length]);
+            veriKaydet.put("bolum",bolumler[i%bolumler.length]);
+
+//            System.out.println("=========   " + i + "  ===========");
+//            System.out.println("doktor adı : " + doktorlar[i]);
+//            System.out.println("hastaneler : " + hastaneler[i%hastaneler.length]);
+//            System.out.println("bolum  : " + bolumler[i%bolumler.length]);
+
+
+            firestore.collection("doktorlar").add(veriKaydet).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    toast("Kaydedilemeyen Doktor Mevcut");
+                    finish();
+                }
+            });
+
+        }
+
+
+
+    }
+
+    public void yukleme(){
+
+        firestore.collection("doktorlar").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+            }
+        });
+
+    }
+
     public void kayit(View view){
         startActivity(new Intent(this, kayitSayfasi.class));
     }

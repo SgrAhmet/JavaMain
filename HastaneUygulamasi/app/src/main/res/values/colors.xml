@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="myPink">#fce1e1</color>
+<!--    <color name="myLightPink">##fcebeb</color>-->
+    <color name="myBlue">#E3ECEE</color>
+    <color name="myRed">#F64E67</color>
+
+
+
+
 </resources>

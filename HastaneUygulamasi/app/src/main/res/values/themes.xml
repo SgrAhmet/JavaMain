@@ -5,5 +5,10 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="BorderedEditText">
+        <item name="android:background">@drawable/border</item>
+        <!-- İsteğe bağlı: padding, font, vs. ekleyebilirsiniz -->
+    </style>
+
     <style name="Theme.HastaneUygulamasi" parent="Base.Theme.HastaneUygulamasi" />
 </resources>
