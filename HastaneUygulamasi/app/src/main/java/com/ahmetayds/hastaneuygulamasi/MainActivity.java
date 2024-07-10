@@ -33,7 +33,17 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     public FirebaseFirestore firestore;
 
-
+    String[] hastaneler ={"Ankara Üniversitesi Hastanesi" , "Gazi Üniversitesi Hastanesi","Hacettepe Üniversitesi Hastanesi","İbn-i Sina Hastanesi"};
+    String[] bolumler = {"Ortopedi","Nöroloji","Dermatoloji","Dahiliye","Psikiyatri"};
+    String[] doktorlar = {
+            "Prof. Dr. Ayşe Yılmaz", "Op. Dr. Mehmet Aksoy", "Doç. Dr. Zeynep Kaya",
+            "Uzm. Dr. Mustafa Demir", "Dr. Elif Korkmaz", "Prof. Dr. Ali Çelik",
+            "Uzm. Dr. Fatma Öztürk", "Dr. Emre Yıldırım", "Doç. Dr. Aylin Şahin",
+            "Prof. Dr. Taksim Delisi Cenk", "Prof. Dr. Nihan Akın", "Uzm. Dr. Mahmut Tuncer",
+            "Dr. Melis Çetin", "Prof. Dr. Ertan Yılmaz", "Doç. Dr. Sema Başar",
+            "Op. Dr. Serkan Yıldız", "Uzm. Dr. Ayşe Nur", "Dr. Mehmet Yılmaz",
+            "Prof. Dr. Selin Demir", "Op. Dr. Yıldız Tilbe "
+    };
 
 
     @Override
@@ -74,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(AuthResult authResult) {
                     toast("Giriş Başarılı");
-                    startActivity(new Intent(MainActivity.this, hastaAnaSayfa.class));
+                    Intent sayfayaGit = new Intent(MainActivity.this,hastaAnaSayfa.class);
+                    sayfayaGit.putExtra("doktorlar",doktorlar);
+                    startActivity(sayfayaGit);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -90,17 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void doktorHastaneKayıt(){
-        String[] hastaneler ={"Ankara Üniversitesi Hastanesi" , "Gazi Üniversitesi Hastanesi","Hacettepe Üniversitesi Hastanesi","İbn-i Sina Hastanesi"};
-        String[] bolumler = {"Ortopedi","Nöroloji","Dermatoloji","Dahiliye","Psikiyatri"};
-        String[] doktorlar = {
-                "Prof. Dr. Ayşe Yılmaz", "Op. Dr. Mehmet Aksoy", "Doç. Dr. Zeynep Kaya",
-                "Uzm. Dr. Mustafa Demir", "Dr. Elif Korkmaz", "Prof. Dr. Ali Çelik",
-                "Uzm. Dr. Fatma Öztürk", "Dr. Emre Yıldırım", "Doç. Dr. Aylin Şahin",
-                "Prof. Dr. Taksim Delisi Cenk", "Prof. Dr. Nihan Akın", "Uzm. Dr. Mahmut Tuncer",
-                "Dr. Melis Çetin", "Prof. Dr. Ertan Yılmaz", "Doç. Dr. Sema Başar",
-                "Op. Dr. Serkan Yıldız", "Uzm. Dr. Ayşe Nur", "Dr. Mehmet Yılmaz",
-                "Prof. Dr. Selin Demir", "Op. Dr. Yıldız Tilbe "
-        };
+
 
         for(int i = 0;i<doktorlar.length;i++){
 
