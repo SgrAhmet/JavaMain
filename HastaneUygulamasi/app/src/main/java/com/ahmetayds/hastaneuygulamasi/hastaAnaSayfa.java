@@ -16,6 +16,8 @@ public class hastaAnaSayfa extends AppCompatActivity {
     private ActivityHastaAnaSayfaBinding binding;
     String[] doktorlar ;
 
+    Boolean isWorking = false ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,39 +61,29 @@ public class hastaAnaSayfa extends AppCompatActivity {
 
 
 
-    public void deneme(View view){
+    public void imageRotation(View view){
 
-        new CountDownTimer(500,100){
+        if(!isWorking){
+            isWorking = true;
+            new CountDownTimer(1300,10){
+                int degree = 0;
+                @Override
+                public void onTick(long milisUntilFinshed){
 
-                int cart = 2;
-
-            @Override
-            public void onTick(long milisUntilFinshed){
-                System.out.println("sayaç çalıştı");
-
-                if(cart == 1){
-                    binding.imageView4.setScaleX(2);
-                    binding.imageView4.setScaleY(2);
-                    cart = 2;
-                }else{
-                    binding.imageView4.setScaleX(1);
-                    binding.imageView4.setScaleY(1);
-                    cart = 1;
+                    binding.imageView4.setRotationY(degree);
+                    degree = degree + 10;
 
                 }
+                @Override
+                public void onFinish(){
+                    binding.imageView4.setRotationY(0);
+                    isWorking = false;
+                }
+            }.start();
+        }
 
 
 
-            }
-            @Override
-            public void onFinish(){
-                System.out.println("sayaç Bitti XXXXX");
-                binding.imageView4.setScaleX(1);
-                binding.imageView4.setScaleY(1);
-
-
-            }
-        }.start();
 
     }
 

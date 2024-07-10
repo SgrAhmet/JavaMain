@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
@@ -28,6 +29,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+
+    Boolean isWorking = false;
 
     ActivityMainBinding binding;
     private FirebaseAuth auth;
@@ -163,6 +166,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void toast(String myString){
         Toast.makeText(this, myString, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+    public void imageRotation(View view){
+
+        if(!isWorking){
+            isWorking = true;
+            new CountDownTimer(1200,10){
+                int degree = 0;
+                @Override
+                public void onTick(long milisUntilFinshed){
+
+                    binding.imageView.setRotationY(degree);
+                    degree = degree + 10;
+
+                }
+                @Override
+                public void onFinish(){
+                    binding.imageView.setRotationY(0);
+                    isWorking = false;
+                }
+            }.start();
+        }
+
+
+
+
     }
 
 

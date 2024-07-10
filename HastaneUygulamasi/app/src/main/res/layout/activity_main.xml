@@ -33,7 +33,7 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="225dp"
+        android:layout_width="205dp"
         android:layout_height="15dp"
         android:layout_marginTop="61dp"
         android:background="#FE405C"
@@ -44,7 +44,7 @@
 
     <View
         android:id="@+id/view2"
-        android:layout_width="225dp"
+        android:layout_width="205dp"
         android:layout_height="15dp"
         android:layout_marginTop="61dp"
         android:background="#C20047"
@@ -59,6 +59,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="180dp"
         android:scaleType="fitXY"
+        android:onClick="imageRotation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
