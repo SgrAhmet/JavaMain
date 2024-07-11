@@ -35,7 +35,7 @@ public class ekle extends AppCompatActivity {
                 String sinif = sinifText.getText().toString();
 
                 SQLiteDatabase veriTabanı = this.openOrCreateDatabase("ogrenciler",MODE_PRIVATE,null);
-//                veriTabanı.execSQL("INSERT INTO ogrenciler (isim,soyisim,yas,sınıf) VALUES ('" + isim + "'");
+                veriTabanı.execSQL("INSERT INTO ogrenciler (isim,soyisim,yas,sınıf) VALUES ('" + isim + "'");
 
                 Toast.makeText(this, "Öğrenci Başarıyla Eklenmiştir", Toast.LENGTH_SHORT).show();
 
