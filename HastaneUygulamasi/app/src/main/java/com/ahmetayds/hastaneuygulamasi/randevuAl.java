@@ -302,7 +302,6 @@ public class randevuAl extends AppCompatActivity {
         String text = hastane + "," + bolum + "," + doktor + ","+ mail + "," +secilenSaat;
 
 
-
         HashMap<String,Object> veriGonder = new HashMap<>();
         veriGonder.put("mail",mail);
         veriGonder.put("hastane",hastane);
