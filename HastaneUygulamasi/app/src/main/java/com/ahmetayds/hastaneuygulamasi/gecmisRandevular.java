@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.ahmetayds.hastaneuygulamasi.databinding.ActivityGecmisRandevularBinding;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,7 +19,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 public class gecmisRandevular extends AppCompatActivity {
@@ -41,6 +45,8 @@ public class gecmisRandevular extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
+        randevuGetir();
+
     }
 
     public void randevuGetir(){
@@ -54,12 +60,21 @@ public class gecmisRandevular extends AppCompatActivity {
 
                 for (DocumentSnapshot dokuman : value.getDocuments()){
                     Map<String,Object> gelenVeri = dokuman.getData();
-                    String tarih =(String)gelenVeri.get("tarih");
+
+                    Timestamp tarih = (Timestamp) gelenVeri.get("olusturmaTarihi");
+                    Date tarih2 = tarih.toDate();
+                    DateFormat tarihFormati = new SimpleDateFormat("dd/MM/yyyy");
+                    String yazilacakTarih=tarihFormati.format(tarih2);
+
+//                    String tarih =(String)gelenVeri.get("tarih");
                     String hastane =(String)gelenVeri.get("hastane");
                     String bolum =(String)gelenVeri.get("bolum");
                     String doktor =(String)gelenVeri.get("doktor");
+                    String saat = (String)gelenVeri.get("saat");
 
-                    yazdirilacak.add(tarih + "-" + hastane + "-" + bolum + "-" + doktor );
+//                    yazdirilacak.add(tarih + "-" + hastane + "-" + bolum + "-" + doktor );
+
+                    yazdirilacak.add("\nOluşturulma Tarihi  : "+yazilacakTarih+"\n"+hastane+"\n"+"Bölüm : " +bolum+"\n"+"Doktor : " +doktor+ "\n" +"Saat : " +saat+"\n        ");
 
                 }
                 ArrayAdapter adapter = new ArrayAdapter(gecmisRandevular.this, android.R.layout.simple_list_item_1,yazdirilacak);
@@ -71,6 +86,9 @@ public class gecmisRandevular extends AppCompatActivity {
         });
 
     }
+
+
+
 
 
 

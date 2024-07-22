@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
+        android:text=""
         android:hint="Şifre"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"

@@ -11,18 +11,42 @@ import com.ahmetayds.finaluygulamasinavi.databinding.ActivityMusteriAnaSayfaBind
 
 public class MusteriAnaSayfa extends AppCompatActivity {
 
+    String girilenKullaniciAdi;
+    String girilenSifre;
+    String girilenIsim;
+    String girilenSoyisim;
+    String girilenCinsiyet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musteri_ana_sayfa);
+
+         girilenKullaniciAdi = getIntent().getStringExtra("girilenKullaniciAdi");
+         girilenSifre = getIntent().getStringExtra("girilenSifre");
+         girilenIsim = getIntent().getStringExtra("girilenIsim");
+         girilenSoyisim = getIntent().getStringExtra("girilenSoyisim");
+         girilenCinsiyet = getIntent().getStringExtra("girilenCinsiyet");
+
+
+
+
     }
 
 
 
 
     public void profilGit(View view){
-        startActivity(new Intent(this,MusteriProfil.class));
+
+        Intent sayfayaGit = new Intent(this,MusteriProfil.class);
+        sayfayaGit.putExtra("girilenKullaniciAdi",girilenKullaniciAdi);
+        sayfayaGit.putExtra("girilenSifre",girilenSifre);
+        sayfayaGit.putExtra("girilenIsim",girilenIsim);
+        sayfayaGit.putExtra("girilenSoyisim",girilenSoyisim);
+        sayfayaGit.putExtra("girilenCinsiyet",girilenCinsiyet);
+        startActivity(sayfayaGit);
+
+//        startActivity(new Intent(this,MusteriProfil.class));
     }
 
     public void urunlistesiGit(View view){

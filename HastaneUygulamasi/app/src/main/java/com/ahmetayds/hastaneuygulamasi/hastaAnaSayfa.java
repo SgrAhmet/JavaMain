@@ -29,7 +29,7 @@ public class hastaAnaSayfa extends AppCompatActivity {
         setContentView(view);
 
 
-        doktorlar =  getIntent().getStringArrayExtra("doktorlar");
+//        doktorlar =  getIntent().getStringArrayExtra("doktorlar");
 
 
     }
@@ -39,7 +39,7 @@ public class hastaAnaSayfa extends AppCompatActivity {
     public void randevuAl(View view){
 
         Intent sayfayaGit = new Intent(this,randevuAl.class);
-        sayfayaGit.putExtra("doktorlar",doktorlar);
+//        sayfayaGit.putExtra("doktorlar",doktorlar);
         startActivity(sayfayaGit);
 //        startActivity(new Intent(this, randevuAl.class));
 

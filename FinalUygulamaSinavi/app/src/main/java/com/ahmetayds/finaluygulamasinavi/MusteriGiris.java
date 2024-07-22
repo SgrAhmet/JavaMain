@@ -17,6 +17,13 @@ public class MusteriGiris extends AppCompatActivity {
 
     int girilenOnay ;
 
+
+    String girilenKullaniciAdiA;
+    String girilenSifreA;
+    String girilenIsim;
+    String girilenSoyisim;
+    String girilenCinsiyet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,9 @@ public class MusteriGiris extends AppCompatActivity {
             Cursor cursor =veriTabani.rawQuery("SELECT * FROM musteriler",null);
 
             int kullanıciAdlari = cursor.getColumnIndex("kullaniciAdi");
+            int isimX = cursor.getColumnIndex("isim");
+            int soyisimX = cursor.getColumnIndex("soyisim");
+            int cinsiyetX = cursor.getColumnIndex("cinsiyet");
             int sifreler = cursor.getColumnIndex("sifre");
             int onaylar = cursor.getColumnIndex("onay");
 
@@ -64,18 +74,21 @@ public class MusteriGiris extends AppCompatActivity {
                 while (cursor.moveToNext()){
                     String kullaniciAdi = cursor.getString(kullanıciAdlari);
                     String sifre = cursor.getString(sifreler);
+                    String isim = cursor.getString(isimX);
+                    String soyisim = cursor.getString(soyisimX);
+                    String cinsiyet = cursor.getString(cinsiyetX);
 
 
-                    System.out.println("===================================");
-                    System.out.println(kullaniciAdi);
-                    System.out.println(sifre);
-                    System.out.println(cursor.getInt(onaylar));
-                    System.out.println("===================================");
 
                     if(girilenKullaniciAdi.equals(kullaniciAdi) && girilenSifre.equals(sifre)){
                         isLogin = true;
                         girilenOnay = cursor.getInt(onaylar);
-//                        girilenOnay = 0;
+
+                        girilenKullaniciAdiA = kullaniciAdi;
+                        girilenSifreA = sifre;
+                        girilenIsim = isim;
+                        girilenSoyisim = soyisim;
+                        girilenCinsiyet = cinsiyet;
                         break;
                     }
 
@@ -86,7 +99,15 @@ public class MusteriGiris extends AppCompatActivity {
                     if(girilenOnay == 0){
                         toast("Onay Aşamasındasınız");
                     }else{
-                        startActivity(new Intent(this, MusteriAnaSayfa.class));
+
+//                        startActivity(new Intent(this, MusteriAnaSayfa.class));
+                        Intent sayfayaGit = new Intent(this,MusteriAnaSayfa.class);
+                        sayfayaGit.putExtra("girilenKullaniciAdi",girilenKullaniciAdiA);
+                        sayfayaGit.putExtra("girilenSifre",girilenSifreA);
+                        sayfayaGit.putExtra("girilenIsim",girilenIsim);
+                        sayfayaGit.putExtra("girilenSoyisim",girilenSoyisim);
+                        sayfayaGit.putExtra("girilenCinsiyet",girilenCinsiyet);
+                        startActivity(sayfayaGit);
                     }
 
                 }else{

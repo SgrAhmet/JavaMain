@@ -33,6 +33,22 @@ public class UrunListeMusteri extends AppCompatActivity {
 
         urunlerListesi = findViewById(R.id.urunlerListesi);
 
+
+
+
+        urunFotograflari.add(R.drawable.nobile_slim_smokin_beyaz_gomlek_3642_damatlik_gomlek_sarar_12016_36_b);
+        urunFotograflari.add(R.drawable.heart);
+        urunFotograflari.add(R.drawable.skirt);
+        urunFotograflari.add(R.drawable.pants);
+        urunFotograflari.add(R.drawable.socks);
+        urunFotograflari.add(R.drawable.sneakers);
+        urunFotograflari.add(R.drawable.belt);
+        urunFotograflari.add(R.drawable.dress);
+        urunFotograflari.add(R.drawable.coat);
+        urunFotograflari.add(R.drawable.jacket);
+
+
+
         try {
             SQLiteDatabase veriTabani = this.openOrCreateDatabase("final_db" ,MODE_PRIVATE,null);
 //            veriTabani.execSQL("CREATE TABLE IF NOT EXISTS urunler (id INTEGER PRIMARY KEY AUTOINCREMENT, urunAdi VARCHAR(50),fiyat INTEGER, stokAdedi INTEGER)");
