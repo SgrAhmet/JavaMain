@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import com.ahmetayds.hastaneuygulamasi.databinding.ActivityDoktorRandevuListBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,6 +70,20 @@ public class doktorRandevuList extends AppCompatActivity {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
+                            for(DocumentSnapshot dokuman : value.getDocuments()){
+                                Map<String ,Object> gelenVeri = dokuman.getData();
+                                String hastaAdi = (String)gelenVeri.get("isim");
+                                String hastaSoyadi =(String)gelenVeri.get("soyisim");
+                                String eklenecek = hastaAdi + " " + hastaSoyadi + " " + "\n" + saatler.get(finali) + " |||";
+
+                                System.out.println(eklenecek);
+
+
+                                randevular.add(eklenecek);
+                                ArrayAdapter adapter = new ArrayAdapter<>(doktorRandevuList.this, android.R.layout.simple_list_item_1,randevular);
+                                binding.itemList.setAdapter(adapter);
+                            }
+
                         }
                     });
 
@@ -78,7 +93,7 @@ public class doktorRandevuList extends AppCompatActivity {
             }
         });
 
-
+        System.out.println(randevular.size());
 
 
 

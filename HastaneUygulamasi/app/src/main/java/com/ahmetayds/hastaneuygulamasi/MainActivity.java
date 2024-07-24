@@ -48,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
             "Prof. Dr. Selin Demir", "Op. Dr. Yıldız Tilbe "
     };
 
+    String[] doktorKullaniciAdi = {
+            "ayseyilmaz", "mehmetaksoy", "zeynepkaya",
+            "mustafademir", "elifkorkmaz", "alicelik",
+            "fatmaozturk", "emreyildirim", "aylinsahin",
+            "taksimdelisicenk", "nihanakin", "mahmuttuncer",
+            "meliscetin", "ertanyilmaz", "semabasar",
+            "serkanyildiz", "aysenur", "mehmetyilmaz",
+            "selindemir", "yildiztilbe"
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,11 +125,8 @@ public class MainActivity extends AppCompatActivity {
             veriKaydet.put("doktorAdi",doktorlar[i]);
             veriKaydet.put("hastane",hastaneler[i%hastaneler.length]);
             veriKaydet.put("bolum",bolumler[i%bolumler.length]);
+            veriKaydet.put("doktorKullaniciAdi",doktorKullaniciAdi[i]);
 
-//            System.out.println("=========   " + i + "  ===========");
-//            System.out.println("doktor adı : " + doktorlar[i]);
-//            System.out.println("hastaneler : " + hastaneler[i%hastaneler.length]);
-//            System.out.println("bolum  : " + bolumler[i%bolumler.length]);
 
 
             firestore.collection("doktorlar").add(veriKaydet).addOnFailureListener(new OnFailureListener() {
