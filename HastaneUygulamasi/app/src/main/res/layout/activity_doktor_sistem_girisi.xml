@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/myBlue"
-    tools:context=".MainActivity">
+    tools:context=".doktorSistemGirisi">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -59,22 +58,21 @@
         android:layout_height="150dp"
         android:layout_marginTop="180dp"
         android:scaleType="fitXY"
-        android:onClick="imageRotation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/cardiogram" />
 
     <EditText
-        android:id="@+id/mailText"
+        android:id="@+id/doktorKullaniciAdiText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/border"
         android:elevation="10dp"
         android:ems="10"
-        android:hint="E-mail"
-        android:text="ahmet@admin.com"
+        android:hint="Kullanıcı Adı"
+        android:text=""
         android:inputType="textEmailAddress"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/sifreText"
+        android:id="@+id/doktorSifreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -90,12 +88,12 @@
         android:elevation="10dp"
         android:ems="10"
         android:hint="Şifre"
-        android:text="123456"
+        android:text=""
         android:inputType="textPassword"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mailText" />
+        app:layout_constraintTop_toBottomOf="@+id/doktorKullaniciAdiText" />
 
     <Button
         android:id="@+id/girisButton"
@@ -103,62 +101,58 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/myRed"
-        android:onClick="giris"
+        android:onClick="doktorSistemGiris"
         android:text="Giriş Yap"
         android:textSize="45px"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sifreText" />
+        app:layout_constraintTop_toBottomOf="@+id/doktorSifreText" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <Button
+        android:id="@+id/geriButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@color/myRed"
+        android:onClick="geriGitDoktorSistem"
+        android:text="Geri Git"
+        android:textSize="45px"
+        android:textStyle="bold"
+        app:icon="@drawable/arrow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/girisButton">
+        app:layout_constraintTop_toBottomOf="@+id/doktorSifreText" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Hesabınız Yok Mu?  "
-            android:textSize="40px"
-            android:textStyle="italic" />
+    <!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/girisButton">-->
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="casual"
-            android:onClick="kayit"
-            android:text="Kayıt Ol"
-            android:textColor="@color/myRed"
-            android:textSize="40px"
-            android:textStyle="bold|italic" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/textView5"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Hesabınız Yok Mu?  "-->
+<!--            android:textSize="40px"-->
+<!--            android:textStyle="italic" />-->
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Doktor Girişi"
-        android:textSize="40px"
-        android:textColor="@color/myRed"
-        android:textStyle="italic"
-        android:onClick="doktorSayfasiGit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-
-
-
-
+<!--        <TextView-->
+<!--            android:id="@+id/textView6"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:fontFamily="casual"-->
+<!--            android:onClick="kayit"-->
+<!--            android:text="Kayıt Ol"-->
+<!--            android:textColor="@color/myRed"-->
+<!--            android:textSize="40px"-->
+<!--            android:textStyle="bold|italic" />-->
+<!--    </LinearLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -65,8 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        TextView textView = findViewById(R.id.textView6);
-        textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        TextView underLine1 = findViewById(R.id.textView6);
+        TextView underLine2 = findViewById(R.id.textView8);
+        underLine1.setPaintFlags(underLine1.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        underLine2.setPaintFlags(underLine2.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         yukleme();
 
@@ -195,6 +197,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    public void doktorSayfasiGit(View view){
+        startActivity(new Intent(this, doktorSistemGirisi.class));
     }
 
 
