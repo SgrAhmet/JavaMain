@@ -24,6 +24,8 @@ public class doktorSistemGirisi extends AppCompatActivity {
     private FirebaseFirestore firestore;
     boolean giris = false;
 
+    String girisYapanDoktorAdi;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,11 @@ public class doktorSistemGirisi extends AppCompatActivity {
 
                 for(DocumentSnapshot dokuman : value.getDocuments()){
                     Map<String , Object> geleVeri =dokuman.getData();
-                    String doktorAdi =(String)geleVeri.get("doktorKullaniciAdi");
+                    String doktorKullaniciAdi =(String)geleVeri.get("doktorKullaniciAdi");
+                    String doktorAdi =(String)geleVeri.get("doktorAdi");
 
-                    if(doktorAdi.equals(kullaniciAdi) && sifre.equals("123456")){
+                    if(doktorKullaniciAdi.equals(kullaniciAdi) && sifre.equals("123456")){
+                        girisYapanDoktorAdi = doktorAdi;
                         giris = true;
                         break;
                     }
@@ -61,8 +65,12 @@ public class doktorSistemGirisi extends AppCompatActivity {
 
                 if(giris){
 //                    GİRİS BARASİLİ
-                    startActivity(new Intent(doktorSistemGirisi.this, doktorRandevuList.class));
-                    finish();
+//                    startActivity(new Intent(doktorSistemGirisi.this, doktorRandevuList.class));
+//                    finish();
+
+                    Intent sayfayaGit = new Intent(doktorSistemGirisi.this,doktorRandevuList.class);
+                    sayfayaGit.putExtra("girisYapanDoktorAdi",girisYapanDoktorAdi);
+                    startActivity(sayfayaGit);
 
                 }else{
                     Toast.makeText(doktorSistemGirisi.this, "Kullanıcı Adı ya da Şifre Yanlış", Toast.LENGTH_SHORT).show();

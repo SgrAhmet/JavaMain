@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.ahmetayds.hastaneuygulamasi.databinding.ActivityDoktorRandevuListBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +25,7 @@ public class doktorRandevuList extends AppCompatActivity {
     public FirebaseAuth auth;
     private FirebaseFirestore firestore;
 
-    String doktorAdi;
+    String girisYapanDoktorAdi;
     ArrayList<String> randevular = new ArrayList<>();
     ArrayList<String> hastaMailleri = new ArrayList<>();
 
@@ -43,43 +44,71 @@ public class doktorRandevuList extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
-
         Intent gelenVeri = getIntent();
-        String doktorKullaiciAdi =gelenVeri.getStringExtra("doktor");
+         girisYapanDoktorAdi =gelenVeri.getStringExtra("girisYapanDoktorAdi");
 
 
-        firestore.collection("doktorlar").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        Toast.makeText(this, girisYapanDoktorAdi, Toast.LENGTH_SHORT).show();
+
+        firestore.collection("randevular").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+
+
+
                 for(DocumentSnapshot dokuman : value.getDocuments()){
                     Map<String ,Object> gelenVeri = dokuman.getData();
-                    String doktor = (String) gelenVeri.get("doktorAdi");
+                    String doktor = (String) gelenVeri.get("doktor");
 
-                    if(doktor.equals(doktorAdi)){
+                    if(doktor.equals(girisYapanDoktorAdi)){
                         String saat = String.valueOf(gelenVeri.get("saat"));
                         saatler.add(saat);
                         String HastaMaili = (String) gelenVeri.get("mail");
                         hastaMailleri.add(HastaMaili);
+
+
+
                     }
                 }
 
                 for(int i = 0;i<saatler.size();i++){
                     int finali = i;
 
+
+
                     firestore.collection("hastalar").addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
+
+
+
                             for(DocumentSnapshot dokuman : value.getDocuments()){
                                 Map<String ,Object> gelenVeri = dokuman.getData();
-                                String hastaAdi = (String)gelenVeri.get("isim");
-                                String hastaSoyadi =(String)gelenVeri.get("soyisim");
-                                String eklenecek = hastaAdi + " " + hastaSoyadi + " " + "\n" + saatler.get(finali) + " |||";
 
-                                System.out.println(eklenecek);
+                                String denemeMaili = (String)gelenVeri.get("mail");
+
+//                                for (int i = 0 ; i < hastaMailleri.size(); i++){
+                                    if(hastaMailleri.get(finali).equals(denemeMaili)){
+
+                                        System.out.println("i sayısı : " + finali);
+
+                                        String hastaAdi = (String)gelenVeri.get("isim");
+                                        String hastaSoyadi =(String)gelenVeri.get("soyisim");
+                                        String eklenecek = hastaAdi + " " + hastaSoyadi + " " + "\n" + saatler.get(finali) + " " + hastaMailleri.get(finali);
+                                        randevular.add(eklenecek);
+
+                                    }
+//                                }
+
+//                                String hastaAdi = (String)gelenVeri.get("isim");
+//                                String hastaSoyadi =(String)gelenVeri.get("soyisim");
+//                                String eklenecek = hastaAdi + " " + hastaSoyadi + " " + "\n" + saatler.get(finali) + " " + hastaMailleri.get(finali);
 
 
-                                randevular.add(eklenecek);
+
+
                                 ArrayAdapter adapter = new ArrayAdapter<>(doktorRandevuList.this, android.R.layout.simple_list_item_1,randevular);
                                 binding.itemList.setAdapter(adapter);
                             }
@@ -93,7 +122,7 @@ public class doktorRandevuList extends AppCompatActivity {
             }
         });
 
-        System.out.println(randevular.size());
+
 
 
 
